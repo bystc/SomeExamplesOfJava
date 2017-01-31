@@ -1,0 +1,5 @@
+student[lisi, 90, 90, 90] 	270
+student[sunba, 60, 60, 80] 	200
+student[zhangsan, 40, 20, 90] 	150
+student[zhaoliu, 20, 40, 60] 	120
+student[wangwu, 10, 20, 20] 	50
