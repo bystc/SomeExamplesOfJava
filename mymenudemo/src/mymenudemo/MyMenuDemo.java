@@ -1,12 +1,16 @@
 package mymenudemo;
 import java.awt.*;
 import java.awt.event.*;
+import java.io.*;
 public class MyMenuDemo {
 
 	private Frame f;
 	private MenuBar mb;
 	private Menu m,subMenu;//有右箭头
 	private MenuItem closeItem,subItem,openItem,saveItem;//没有右箭头
+	private TextArea ta;
+	private FileDialog openDia,saveDia;
+	
 	
 	MyMenuDemo()
 	{
@@ -15,9 +19,10 @@ public class MyMenuDemo {
 	public void init(){
 		f=new Frame("My window");
 		f.setBounds(300,100,600,500);
-		f.setLayout(new FlowLayout());
+		//f.setLayout(new FlowLayout());
 		mb=new MenuBar();
 		
+		ta=new TextArea();
 		m=new Menu("File");
 		openItem=new MenuItem("open");
 		saveItem=new MenuItem("save");
@@ -34,6 +39,10 @@ public class MyMenuDemo {
 		
 		f.setMenuBar(mb);
 		
+		openDia=new FileDialog(f,"i want to open",FileDialog.LOAD);
+		saveDia=new FileDialog(f,"i want to save",FileDialog.SAVE);
+		f.add(ta);
+		
 		myEvent();
 		f.setVisible(true);
 		
@@ -41,11 +50,41 @@ public class MyMenuDemo {
 		
 	}
 	private void myEvent(){
+		openItem.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				
+				openDia.setVisible(true);
+				String dirPath=openDia.getDirectory();
+				String fileName=openDia.getFile();
+				System.out.println(dirPath+"..."+fileName);
+				if(dirPath==null||fileName==null)
+					return ;
+				ta.setText("");
+				File file=new File(dirPath,fileName);
+				try{
+					BufferedReader bufr=new BufferedReader(new FileReader(file));
+					String line =null;
+					while((line=bufr.readLine())!=null){
+						ta.append(line+"\r\n");
+					}
+				}catch(IOException i){
+					throw new RuntimeException("Reading Error!");
+				}
+				
+			}
+		});
+		
+		
+		
+		
+		
 		closeItem.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
+				
 				System.exit(0);
 			}
 		});
