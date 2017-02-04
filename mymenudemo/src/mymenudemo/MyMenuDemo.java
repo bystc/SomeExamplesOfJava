@@ -10,7 +10,7 @@ public class MyMenuDemo {
 	private MenuItem closeItem,subItem,openItem,saveItem;//没有右箭头
 	private TextArea ta;
 	private FileDialog openDia,saveDia;
-	
+	private File file;
 	
 	MyMenuDemo()
 	{
@@ -50,6 +50,32 @@ public class MyMenuDemo {
 		
 	}
 	private void myEvent(){
+		saveItem.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {	
+				if(file==null)
+				{
+				saveDia.setVisible(true);
+				String dirPath=saveDia.getDirectory();
+				String fileName=saveDia.getFile();
+				if(dirPath==null||fileName==null)
+					return ;
+				file=new File(dirPath,fileName);
+				}
+				try{
+					BufferedWriter bufw=new BufferedWriter(new FileWriter(file));
+					String text=ta.getText();
+					bufw.write(text);
+					bufw.close();
+				}
+				catch(IOException i){
+					throw new RuntimeException();
+				}
+			}
+		});
+		
+		
 		openItem.addActionListener(new ActionListener() {
 			
 			@Override
@@ -62,7 +88,7 @@ public class MyMenuDemo {
 				if(dirPath==null||fileName==null)
 					return ;
 				ta.setText("");
-				File file=new File(dirPath,fileName);
+				file=new File(dirPath,fileName);
 				try{
 					BufferedReader bufr=new BufferedReader(new FileReader(file));
 					String line =null;
