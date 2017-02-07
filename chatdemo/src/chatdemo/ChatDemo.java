@@ -54,7 +54,7 @@ class Rece implements Runnable{
 
 
 public class ChatDemo {
-	public static void main(String[] args) throws Exception{
+	public static void main(String[] args)throws Exception{
 		DatagramSocket sendSocket=new DatagramSocket();
 		DatagramSocket receSocket=new DatagramSocket(10002);
 		new Thread(new Send(sendSocket)).start();
