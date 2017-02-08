@@ -46,8 +46,8 @@ class TextServer {
 		PrintWriter out=new PrintWriter(new FileWriter("server.txt"),true);
 		String line=null;
 		while((line=bufIn.readLine())!=null){
-//			if("over".equals(line))
-//				break;
+			if("over".equals(line))
+				break;
 			out.println(line);
 			
 		}
