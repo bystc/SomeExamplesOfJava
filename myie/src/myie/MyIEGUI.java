@@ -107,7 +107,7 @@ public class MyIEGUI {
 	
 	private void showDir() throws Exception{
 		ta.setText("");
-		String url=tf.getText();//http://192.168.37.1:8080/myweb/demo.txt
+		String url=tf.getText();//http://192.168.37.1:8080/myweb/demo.html
 		int index1=url.indexOf("//")+2;
 		int index2=url.indexOf("/",index1);
 		
