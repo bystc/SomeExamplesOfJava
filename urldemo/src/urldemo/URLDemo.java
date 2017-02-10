@@ -2,7 +2,7 @@ package urldemo;
 import java.net.*;
 public class URLDemo {
 
-	public static void main(String[] args) throws MalformedURLException {
+	public static void main(String[] args) throws MalformedURLException, Exception {
 		URL url=new URL("http://192.168.37.1/myweb/demo.html?:name=haha&&age=30");
 		System.out.println("getProtocol() :"+url.getProtocol());
 		System.out.println("getHost() :"+url.getHost());
@@ -11,7 +11,7 @@ public class URLDemo {
 		System.out.println("getPath() :"+url.getPath());
 		System.out.println("getQuery() :"+url.getQuery());
 		
-
+		System.out.println(InetAddress.getByName("www.baidu.com"));
 	}
 
 }
